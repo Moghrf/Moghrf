@@ -134,6 +134,7 @@
         const uploadImage = document.getElementById("uploadImage");
         const imageDisplay = document.getElementById("imageDisplay");
         const imageGallery = document.getElementById("imageGallery");
+        const ownerText = document.getElementById("ownerText");
 
         let emojiCounts = {
             '🫶🏻': 0,
@@ -148,6 +149,11 @@
         };
 
         let sharedImages = [];
+
+        // Load stored data on page load
+        window.onload = function () {
+            loadStoredData();
+        };
 
         // Check password
         function checkPassword() {
@@ -181,6 +187,7 @@
                     sharedImages.pop(); // Remove the last image if more than 5
                 }
                 updateImageGallery();
+                saveData(); // Save data when image is added
             };
             reader.readAsDataURL(e.target.files[0]);
         });
@@ -206,6 +213,7 @@
                 emojiToggled[emoji] = true;
             }
             document.getElementById(`emoji${getEmojiIndex(emoji)}Count`).innerText = emojiCounts[emoji];
+            saveData(); // Save data when emoji is clicked
         }
 
         // Function to get the index of an emoji for the count display
@@ -214,6 +222,18 @@
             if (emoji === '💟') return 2;
             if (emoji === '🤨') return 3;
         }
-    </script>
+
+        // Function to save all data
+        function saveData() {
+            const data = {
+                sharedImages: sharedImages,
+                emojiCounts: emojiCounts,
+                ownerText: ownerText.value
+            };
+            localStorage.setItem("moghrfData", JSON.stringify(data));
+        }
+
+        // Load stored
+        </script>
 </body>
 </html>
