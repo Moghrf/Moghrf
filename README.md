@@ -1,205 +1,209 @@
-
 <!DOCTYPE html>
 <html lang="ar">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ghofrane ^°^</title>
+    <title>moghrf</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f8d7e1;
-            color: #333;
+            background-size: cover;
+            background-position: center;
+            color: #271A17;
+            text-align: center;
             margin: 0;
             padding: 0;
         }
         header {
-            background-color: #f0a6c1;
-            text-align: center;
+            background-color: rgba(242, 214, 214, 0.8); /* تأثير شفاف لتباين النص */
             padding: 20px;
-        }
-        header h1 {
-            font-size: 50px;
-            color: black;
+            font-size: 2em;
         }
         section {
             margin: 20px;
+            background-color: rgba(255, 255, 255, 0.8); /* تأثير شفاف على الأقسام */
+            border-radius: 8px;
+            padding: 20px;
         }
-        h2 {
-            font-size: 24px;
-            color: black;
+        .social-links {
+            margin: 20px;
         }
         .social-links a {
-            color: #f06292;
-            margin: 10px;
-            font-size: 18px;
+            margin: 0 15px;
             text-decoration: none;
+            font-size: 1.5em;
+            color: #271A17;
         }
-        .social-links a:hover {
-            text-decoration: underline;
-        }
-        .latest-drawing img {
-            width: 100%;
-            max-width: 400px;
-            border-radius: 10px;
-            display: block;
-            margin: 20px auto;
-        }
-        .message-form {
-            background-color: #ffffff;
-            padding: 20px;
-            border-radius: 10px;
+        .image-share {
+            margin-top: 30px;
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
-        .message-form textarea {
-            width: 100%;
-            height: 150px;
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 16px;
-        }
-        .message-form button {
-            background-color: #f06292;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
+        .emoji-btn {
+            font-size: 2em;
+            margin: 10px;
             cursor: pointer;
-            font-size: 18px;
         }
-        .message-form button:hover {
-            background-color: #f48fb1;
+        .emoji-count {
+            font-size: 1.2em;
+            margin-left: 5px;
         }
-        .upload-section {
-            text-align: center;
-            margin: 20px 0;
+        .previous-images {
+            margin-top: 20px;
         }
-        .upload-section input[type="file"] {
+        .previous-images img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            margin: 5px;
+            border-radius: 8px;
+        }
+        .hidden-text {
+            margin-top: 10px;
+            font-size: 1.2em;
+            background-color: #f0f0f0;
+            padding: 10px;
+            border-radius: 8px;
             display: none;
         }
-        .upload-section label {
-            background-color: #f06292;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 18px;
-        }
-        .upload-section label:hover {
-            background-color: #f48fb1;
-        }
-        .color-picker {
+        #backgroundUploadSection {
             margin: 20px;
-            text-align: center;
-        }
-        .color-picker label {
-            font-size: 18px;
-            margin-right: 10px;
-        }
-        .color-picker input {
-            width: 100px;
-            height: 30px;
+            display: none;
         }
     </style>
 </head>
 <body>
+    <header>
+        Welcome to Moghrf's World!
+    </header>
 
-<header>
-    <h1>ghofrane ^°^</h1>
-</header>
+    <section>
+        <h2>Moghrf's Socials</h2>
+        <div class="social-links">
+            <a href="https://www.instagram.com/ks._2sw?igsh=MWhqMzhjMHd0N3BqNw==" target="_blank">Instagram</a>
+            <a href="https://tiktok.com/@reo4gfrn" target="_blank">TikTok</a>
+        </div>
+    </section>
 
-<section id="social-media">
-    <h2>moghrf' socials</h2>
-    <div class="social-links">
-        <a href="https://www.instagram.com/ks._2sw?igsh=MWhqMzhjMHd0N3BqNw==" target="_blank">حساب انستغرام</a>
-        <a href="https://tiktok.com/@reo4gfrn" target="_blank">حساب تيك توك</a>
-    </div>
-</section>
+    <section class="image-share">
+        <h2>Something that Moghrf Wants to Share</h2>
+        <div id="imageUploadSection" style="display: none;">
+            <input type="file" id="uploadImage" accept="image/*">
+        </div>
+        <div id="imageDisplay"></div>
+        <div>
+            <button class="emoji-btn" onclick="addEmoji('🫶🏻')">🫶🏻 <span id="emoji1Count" class="emoji-count">0</span></button>
+            <button class="emoji-btn" onclick="addEmoji('💟')">💟 <span id="emoji2Count" class="emoji-count">0</span></button>
+            <button class="emoji-btn" onclick="addEmoji('🤨')">🤨 <span id="emoji3Count" class="emoji-count">0</span></button>
+        </div>
+        <div id="hiddenText" class="hidden-text">
+            <textarea id="ownerText" rows="3" cols="30" placeholder="أكتب هنا ما تود أن يراه الجميع..."></textarea>
+            <button onclick="saveOwnerText()">حفظ</button>
+        </div>
+    </section>
 
-<section id="latest-drawing">
-    <h2>moghrf's last drawing</h2>
-    <div class="latest-drawing">
-        <img src="path/to/your/latest-drawing.jpg" alt="آخر رسمه غفران" id="drawingImage">
-        <!-- Replace "path/to/your/latest-drawing.jpg" with the actual image path -->
-    </div>
-    <div class="upload-section">
-        <h3>ارفع الصورة</h3>
-        <!-- Button that allows the user to select an image -->
-        <label for="imageUpload">اختار صورة</label>
-        <input type="file" id="imageUpload" accept="image/*" onchange="uploadImage()">
-    </div>
-</section>
+    <section class="previous-images">
+        <h3>Your Previous Shared Images</h3>
+        <div id="imageGallery"></div>
+    </section>
 
-<section id="message">
-    <h2>something you want to say</h2>
-    <div class="message-form">
-        <form action="mailto:zae098.com@gmail.com" method="POST" enctype="multipart/form-data">
-            <textarea name="message" placeholder="اكتب هنا رسالتك..."></textarea>
-            <button type="submit">إرسال</button>
-        </form>
-    </div>
-</section>
+    <!-- Section for uploading background image -->
+    <section id="backgroundUploadSection">
+        <h3>Change Background Image</h3>
+        <input type="file" id="uploadBackground" accept="image/*">
+    </section>
 
-<section id="color-picker" class="color-picker">
-    <h2>تغيير ألوان الموقع</h2>
-    <label for="headerColor">لون العنوان:</label>
-    <input type="color" id="headerColor" onchange="changeHeaderColor(this.value)">
-    <br><br>
-    <label for="backgroundColor">لون الخلفية:</label>
-    <input type="color" id="backgroundColor" onchange="changeBackgroundColor(this.value)">
-    <br><br>
-    <label for="buttonColor">لون الأزرار:</label>
-    <input type="color" id="buttonColor" onchange="changeButtonColor(this.value)">
-</section>
+    <script>
+        // Simulate a user check (replace with actual user validation)
+        const isOwner = true;  // Set this to true if you're the owner, false otherwise
 
-<script>
-    // Function to upload image
-    function uploadImage() {
-        const fileInput = document.getElementById('imageUpload');
-        const image = fileInput.files[0];
-        if (image) {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                document.getElementById('drawingImage').src = e.target.result;
-            }
-            reader.readAsDataURL(image);
+        // Show the image upload section and background change option only if the user is the owner
+        if (isOwner) {
+            document.getElementById("imageUploadSection").style.display = "block";
+            document.getElementById("hiddenText").style.display = "block";  // Show the text area for the owner
+            document.getElementById("backgroundUploadSection").style.display = "block"; // Show background change section
         }
-    }
 
-    // Change header color
-    function changeHeaderColor(color) {
-        document.querySelector('header').style.backgroundColor = color;
-    }
+        let emojiCounts = {
+            '🫶🏻': 0,
+            '💟': 0,
+            '🤨': 0
+        };
 
-    // Change background color
-    function changeBackgroundColor(color) {
-        document.body.style.backgroundColor = color;
-    }
+        let emojiToggled = {
+            '🫶🏻': false,
+            '💟': false,
+            '🤨': false
+        };
 
-    // Change button color
-    function changeButtonColor(color) {
-        const buttons = document.querySelectorAll('button');
-        buttons.forEach(button => {
-            button.style.backgroundColor = color;
+        let sharedImages = [];
+
+        const uploadImage = document.getElementById("uploadImage");
+        const imageDisplay = document.getElementById("imageDisplay");
+        const imageGallery = document.getElementById("imageGallery");
+        const uploadBackground = document.getElementById("uploadBackground");
+
+        // Function to handle image upload and display
+        uploadImage.addEventListener("change", (e) => {
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                imageDisplay.innerHTML = `<img src="${event.target.result}" style="max-width: 100%; height: auto; border-radius: 8px;">`;
+                // Add image to shared images array
+                sharedImages.unshift(event.target.result); // Add to the front
+                if (sharedImages.length > 5) {
+                    sharedImages.pop(); // Remove the last image if more than 5
+                }
+                updateImageGallery();
+            };
+            reader.readAsDataURL(e.target.files[0]);
         });
-    }
-</script>
 
+        // Function to update the image gallery
+        function updateImageGallery() {
+            imageGallery.innerHTML = "";
+            sharedImages.forEach(image => {
+                const imgElement = document.createElement("img");
+                imgElement.src = image;
+                imageGallery.appendChild(imgElement);
+            });
+        }
+
+        // Function to handle emoji reactions
+        function addEmoji(emoji) {
+            // If emoji is already toggled (clicked previously), remove it
+            if (emojiToggled[emoji]) {
+                emojiCounts[emoji]--;
+                emojiToggled[emoji] = false;
+            } else {
+                emojiCounts[emoji]++;
+                emojiToggled[emoji] = true;
+            }
+            document.getElementById(`emoji${getEmojiIndex(emoji)}Count`).innerText = emojiCounts[emoji];
+        }
+
+        // Function to get the index of an emoji for the count display
+        function getEmojiIndex(emoji) {
+            if (emoji === '🫶🏻') return 1;
+            if (emoji === '💟') return 2;
+            if (emoji === '🤨') return 3;
+        }
+
+        // Function to save the owner's text
+        function saveOwnerText() {
+            const ownerText = document.getElementById("ownerText").value;
+            alert("تم حفظ النص: " + ownerText);
+        }
+
+        // Function to change the background image
+        uploadBackground.addEventListener("change", (e) => {
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                document.body.style.backgroundImage = `url('${event.target.result}')`;
+            };
+            reader.readAsDataURL(e.target.files[0]);
+        });
+    </script>
 </body>
 </html>
-<!--
-**Moghrf/Moghrf** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
-
-Here are some ideas to get you started:
-
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
