@@ -15,13 +15,13 @@
             padding: 0;
         }
         header {
-            background-color: rgba(242, 214, 214, 0.8); /* تأثير شفاف لتباين النص */
+            background-color: rgba(242, 214, 214, 0.8);
             padding: 20px;
             font-size: 2em;
         }
         section {
             margin: 20px;
-            background-color: rgba(255, 255, 255, 0.8); /* تأثير شفاف على الأقسام */
+            background-color: rgba(255, 255, 255, 0.8);
             border-radius: 8px;
             padding: 20px;
         }
@@ -72,14 +72,28 @@
             margin: 20px;
             display: none;
         }
+        .password-section {
+            display: block;
+            margin-top: 100px;
+        }
     </style>
 </head>
 <body>
     <header>
-        Welcome to Moghrf's World!
+        مرحباً بك في موقع Moghrf!
     </header>
 
-    <section>
+    <!-- Section for password -->
+    <section id="passwordSection" class="password-section">
+        <h2>هل أنت مغرف؟</h2>
+        <p>إذا لم تكن، اضغط "تخطي" للمتابعة.</p>
+        <input type="password" id="passwordInput" placeholder="أدخل كلمة المرور">
+        <button onclick="checkPassword()">دخول</button>
+        <button onclick="skipPassword()">تخطي</button>
+    </section>
+
+    <!-- Main content -->
+    <section id="mainSection" style="display: none;">
         <h2>Moghrf's Socials</h2>
         <div class="social-links">
             <a href="https://www.instagram.com/ks._2sw?igsh=MWhqMzhjMHd0N3BqNw==" target="_blank">Instagram</a>
@@ -87,7 +101,7 @@
         </div>
     </section>
 
-    <section class="image-share">
+    <section id="imageShareSection" style="display: none;" class="image-share">
         <h2>Something that Moghrf Wants to Share</h2>
         <div id="imageUploadSection" style="display: none;">
             <input type="file" id="uploadImage" accept="image/*">
@@ -100,31 +114,26 @@
         </div>
         <div id="hiddenText" class="hidden-text">
             <textarea id="ownerText" rows="3" cols="30" placeholder="أكتب هنا ما تود أن يراه الجميع..."></textarea>
-            <button onclick="saveOwnerText()">حفظ</button>
+            <button onclick="openConfirmationPopup()">حفظ</button>
         </div>
     </section>
 
-    <section class="previous-images">
+    <section id="previousImagesSection" class="previous-images">
         <h3>Your Previous Shared Images</h3>
         <div id="imageGallery"></div>
     </section>
 
-    <!-- Section for uploading background image -->
-    <section id="backgroundUploadSection">
-        <h3>Change Background Image</h3>
-        <input type="file" id="uploadBackground" accept="image/*">
-    </section>
-
     <script>
-        // Simulate a user check (replace with actual user validation)
-        const isOwner = true;  // Set this to true if you're the owner, false otherwise
+        const correctPassword = "fuyuismylove";
+        const passwordSection = document.getElementById("passwordSection");
+        const mainSection = document.getElementById("mainSection");
+        const imageShareSection = document.getElementById("imageShareSection");
+        const previousImagesSection = document.getElementById("previousImagesSection");
 
-        // Show the image upload section and background change option only if the user is the owner
-        if (isOwner) {
-            document.getElementById("imageUploadSection").style.display = "block";
-            document.getElementById("hiddenText").style.display = "block";  // Show the text area for the owner
-            document.getElementById("backgroundUploadSection").style.display = "block"; // Show background change section
-        }
+        const passwordInput = document.getElementById("passwordInput");
+        const uploadImage = document.getElementById("uploadImage");
+        const imageDisplay = document.getElementById("imageDisplay");
+        const imageGallery = document.getElementById("imageGallery");
 
         let emojiCounts = {
             '🫶🏻': 0,
@@ -140,10 +149,26 @@
 
         let sharedImages = [];
 
-        const uploadImage = document.getElementById("uploadImage");
-        const imageDisplay = document.getElementById("imageDisplay");
-        const imageGallery = document.getElementById("imageGallery");
-        const uploadBackground = document.getElementById("uploadBackground");
+        // Check password
+        function checkPassword() {
+            if (passwordInput.value === correctPassword) {
+                passwordSection.style.display = "none";
+                mainSection.style.display = "block";
+                imageShareSection.style.display = "block";
+                previousImagesSection.style.display = "block"; // Enable image sharing and other features
+            } else {
+                alert("كلمة المرور غير صحيحة!");
+            }
+        }
+
+        // Skip password and show limited content
+        function skipPassword() {
+            passwordSection.style.display = "none";
+            mainSection.style.display = "block"; // Show social links
+            // Only show image gallery, not the upload section or emoji reactions
+            imageShareSection.style.display = "none";
+            previousImagesSection.style.display = "block";
+        }
 
         // Function to handle image upload and display
         uploadImage.addEventListener("change", (e) => {
@@ -189,21 +214,6 @@
             if (emoji === '💟') return 2;
             if (emoji === '🤨') return 3;
         }
-
-        // Function to save the owner's text
-        function saveOwnerText() {
-            const ownerText = document.getElementById("ownerText").value;
-            alert("تم حفظ النص: " + ownerText);
-        }
-
-        // Function to change the background image
-        uploadBackground.addEventListener("change", (e) => {
-            const reader = new FileReader();
-            reader.onload = function(event) {
-                document.body.style.backgroundImage = `url('${event.target.result}')`;
-            };
-            reader.readAsDataURL(e.target.files[0]);
-        });
     </script>
 </body>
 </html>
