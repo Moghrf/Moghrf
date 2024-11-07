@@ -103,7 +103,7 @@
 
     <section id="imageShareSection" style="display: none;" class="image-share">
         <h2>Something that Moghrf Wants to Share</h2>
-        <div id="imageUploadSection" style="display: none;">
+        <div id="imageUploadSection">
             <input type="file" id="uploadImage" accept="image/*">
         </div>
         <div id="imageDisplay"></div>
@@ -230,10 +230,7 @@
                 emojiCounts: emojiCounts,
                 ownerText: ownerText.value
             };
-            localStorage.setItem("moghrfData", JSON.stringify(data));
-        }
-
-        // Load stored
-        </script>
+            localStorage.setItem("moghrfData", JSON.stringify(data
+             </script>
 </body>
 </html>
